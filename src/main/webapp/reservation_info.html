@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <title>填写个人信息</title>
+  <meta name="keywords" content="Bootstrap 3 Admin Dashboard Template Theme" />
+  <meta name="description" content="AdminDesigns - Bootstrap 3 Admin Dashboard Theme">
+  <meta name="author" content="AdminDesigns">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/skin/default_skin/css/theme.css">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/img/favicon.ico">
+
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+
+
+
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  
+</head>
+
+<body>
+
+  <!-- 顶部导航栏 -->
+  <header class="navbar navbar-shadow">
+
+    <div class="navbar-branding">
+      <a class="navbar-brand" href="dashboard.html">
+        <b>中南医院</b>智能导诊系统
+      </a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown menu-merge">
+        <div class="navbar-btn btn-group">
+          <button data-toggle="dropdown" class="btn btn-sm dropdown-toggle">
+            <span class="fa fa-bell-o fs14 va-m"></span>
+            <span class="badge badge-danger">9</span>
+          </button>
+        </div>
+      </li>
+      <li class="dropdown menu-merge">
+        <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown">
+          <img src="assets/img/avatars/1.jpg" alt="avatar" class="mw30 br64">
+          <span class="hidden-xs pl15"> Michael .R </span>
+          <span class="caret caret-tp hidden-xs"></span>
+        </a>
+      </li>
+    </ul>
+  </header>
+  <!-- End: Header -->
+
+  <!-- Start: Main -->
+  <div id="main">
+
+    <!-- Start: Content-Wrapper -->
+    <div id="content_wrapper">
+      <!-- Begin: Content -->
+      <div id="content" class="table-layout animated fadeIn col-md-8">
+        <!-- begin: .tray-center -->
+        <div class="tray tray-center">
+          <div class="page-tabs container">
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="">填写个人信息</a>
+              </li>
+              <li>
+                <a href="">选择医生</a>
+              </li>
+              <li>
+                <a href="">预约缴费</a>
+              </li>
+              <li>
+                <a href="">智能导航</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+
+            <div class="container">
+              <h2 style="text-align: center">填写个人信息</h2>
+            </div>
+
+            <div class="panel-body" style="margin-top: 50px">
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">姓名</label>
+                  <div class="col-lg-8">
+                    <div class="bs-component">
+                      <input type="text" id="inputName" class="form-control" placeholder="">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">手机号</label>
+                  <div class="col-lg-8">
+                    <div class="bs-component">
+                      <input type="text" id="inputPhone" class="form-control" placeholder="">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">性别</label>
+                  <div class="col-lg-8">
+                    <div class="bs-component">
+                      <select class="form-control">
+                        <option>男</option>
+                        <option>女</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="disabledInput" class="col-lg-3 control-label">科室</label>
+                  <div class="col-lg-8">
+                    <div class="bs-component">
+                      <input class="form-control" id="disabledInput" type="text" placeholder="泌尿外科" disabled="">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-md-offset-1" style="margin-top: 100px" id="process">
+        <div class="panel">
+          <div class="panel-heading">
+            <span class="panel-icon">
+              <i class="fa fa-clock-o"></i>
+            </span>
+            <span class="panel-title"> 就诊流程</span>
+          </div>
+          <div class="panel-body ptn pbn p10">
+            <ol class="timeline-list">
+              <li class="timeline-item">
+                <div class="timeline-icon bg-dark light">
+                  <span class="fa fa-tags"></span>
+                </div>
+                <div class="timeline-desc">
+                  <b>Michael</b> Added to his store:
+                  <a href="#">Ipod</a>
+                </div>
+                <div class="timeline-date">1:25am</div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-icon bg-dark light">
+                  <span class="fa fa-tags"></span>
+                </div>
+                <div class="timeline-desc">
+                  <b>Sara</b> Added his store:
+                  <a href="#">Notebook</a>
+                </div>
+                <div class="timeline-date">3:05am</div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-icon bg-success">
+                  <span class="fa fa-usd"></span>
+                </div>
+                <div class="timeline-desc">
+                  <b>Admin</b> created invoice for:
+                  <a href="#">Software</a>
+                </div>
+                <div class="timeline-date">4:15am</div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-icon bg-dark light">
+                  <span class="fa fa-tags"></span>
+                </div>
+                <div class="timeline-desc">
+                  <b>Sara</b> Added to his store:
+                  <a href="#">Notebook</a>
+                </div>
+                <div class="timeline-date">3:05am</div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- End: Main -->
+
+</body>
+
+</html>
