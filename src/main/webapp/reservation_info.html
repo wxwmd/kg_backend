@@ -27,7 +27,7 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  
+
 </head>
 
 <body>
@@ -145,55 +145,56 @@
           </div>
           <div class="panel-body ptn pbn p10">
             <ol class="timeline-list">
-              <li class="timeline-item">
+              <li class="timeline-item" v-for="item in pro">
                 <div class="timeline-icon bg-dark light">
                   <span class="fa fa-tags"></span>
                 </div>
                 <div class="timeline-desc">
-                  <b>Michael</b> Added to his store:
-                  <a href="#">Ipod</a>
+                  <b>{{item.name}}</b> <br />
+                  <p class="text-info">{{item.desc}}</p>
                 </div>
-                <div class="timeline-date">1:25am</div>
-              </li>
-              <li class="timeline-item">
-                <div class="timeline-icon bg-dark light">
-                  <span class="fa fa-tags"></span>
-                </div>
-                <div class="timeline-desc">
-                  <b>Sara</b> Added his store:
-                  <a href="#">Notebook</a>
-                </div>
-                <div class="timeline-date">3:05am</div>
-              </li>
-              <li class="timeline-item">
-                <div class="timeline-icon bg-success">
-                  <span class="fa fa-usd"></span>
-                </div>
-                <div class="timeline-desc">
-                  <b>Admin</b> created invoice for:
-                  <a href="#">Software</a>
-                </div>
-                <div class="timeline-date">4:15am</div>
-              </li>
-              <li class="timeline-item">
-                <div class="timeline-icon bg-dark light">
-                  <span class="fa fa-tags"></span>
-                </div>
-                <div class="timeline-desc">
-                  <b>Sara</b> Added to his store:
-                  <a href="#">Notebook</a>
-                </div>
-                <div class="timeline-date">3:05am</div>
               </li>
             </ol>
           </div>
         </div>
       </div>
 
+
+      <div class="col-md-1 col-md-offset-4">
+        <button type="button" class="btn ladda-button btn-success" onclick="window.location.href='docter_list.html'">下一步>></button>
+      </div>
     </div>
+
+
 
   </div>
   <!-- End: Main -->
+
+  <script>
+    var progress=new Vue({
+		el:'#process',
+		data:{
+			pro:[
+				{
+					name:'挂号',
+					desc:'在系统内会门诊大厅内进行挂号。'
+				},{
+					name:'与医生对话',
+					desc:'确认检查项目'
+				},{
+					name:'进行检查',
+					desc:'按照医生的安排去进行各项检查'
+				},{
+					name:'确定药物',
+					desc:'医生根据检查结果，确定要使用的药物'
+				},{
+					name:'拿药',
+					desc:'执医生处方去拿药，药师会开药、开具吃法'
+				},
+			]
+		}
+	})
+  </script>
 
 </body>
 
