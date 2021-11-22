@@ -11,7 +11,7 @@ public class SearchDao {
     private Session session;
 
     public SearchDao() {
-        Driver driver= GraphDatabase.driver("neo4j://39.107.233.150:7687",
+        Driver driver= GraphDatabase.driver("neo4j://localhost:7687",
                 AuthTokens.basic("neo4j","123456"));
         session=driver.session();
     }
