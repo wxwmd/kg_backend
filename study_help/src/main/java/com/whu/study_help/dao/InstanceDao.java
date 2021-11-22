@@ -1,31 +1,29 @@
 package com.whu.study_help.dao;
 
-
-
 import org.neo4j.driver.*;
 import org.neo4j.driver.util.Pair;
 
 import java.util.List;
+import java.util.Map;
 
-public class SearchDao {
+public class InstanceDao {
     private Session session;
 
-    public SearchDao() {
+    public InstanceDao() {
         Driver driver= GraphDatabase.driver("neo4j://39.107.233.150:7687",
                 AuthTokens.basic("neo4j","123456"));
         session=driver.session();
     }
 
-    public String  searchEntity(String name){
+    public String  searchInstance(String name){
         String result=session.readTransaction(new TransactionWork<String>() {
             @Override
             public String execute(Transaction transaction) {
-                Result result1 = transaction.run(String.format("match (n{name:'%s'}) return properties(n)", name));
+                Result result1 = transaction.run(String.format("match (n{name:'%s'}),(n)-[r:`实例`]->(n1) return n1.text", name));
                 if(result1.hasNext()){
-                    List<Pair<String, Value>> fields = result1.single().fields();
-                    Value value = fields.get(0).value();
-                    System.out.println(value);
-                    return value.toString();
+                    Map<String, Object> stringObjectMap = result1.next().asMap();
+                    System.out.println(stringObjectMap);
+                    return (String) stringObjectMap.get("n1.text");
                 }else{
                     return null;
                 }

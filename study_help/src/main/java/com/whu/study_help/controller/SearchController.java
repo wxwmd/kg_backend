@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class SearchController {
 
-    private SearchSevice searchSevice=new SearchSevice();
+
 
     @RequestMapping("/getEntity")
     public String SearchEntity(String name){
-
-        return searchSevice.searchEntity(name);
+        SearchSevice searchSevice=new SearchSevice();
+        String result = searchSevice.searchEntity(name);
+        searchSevice.destory();
+        return result;
     }
 }
