@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <title>问答界面</title>
+  <meta name="keywords" content="Bootstrap 3 Admin Dashboard Template Theme" />
+  <meta name="description" content="AdminDesigns - Bootstrap 3 Admin Dashboard Theme">
+  <meta name="author" content="AdminDesigns">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <script src="jquery/jquery-3.3.1.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+
+  <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/skin/default_skin/css/theme.css">
+
+  <!-- Admin Forms CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/admin-tools/admin-forms/css/admin-forms.min.css">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/img/favicon.ico">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- Start: Header -->
+<header class="row ">
+  <nav class="navbar navbar-inverse" role="navigation" style="background-color: #EEEEEE">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <img src="assets/img/logos/zn.png" height="50" alt="" onclick="window.location.href='index.html'">
+      </div>
+      <div style="margin-left: 40px">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              医疗智能搜索<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="search_gainian.html">医疗概念智能搜索</a>
+              </li>
+              <li>
+                <a href="search_zhinan.html">全科临床指南智能搜索</a>
+              </li>
+              <li>
+                <a href="search_wenda.html">医患问答数据智能搜索</a>
+              </li>
+              <li>
+                <a href="search_jingyan.html">医生经验智能搜索</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="auto_answer.html">智能问答</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              医疗能力评估<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="test_knowledge.html">医疗知识测评</a>
+              </li>
+              <li>
+                <a href="test_fangzhen.html">仿真问诊</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-1 col-md-offset-7" style="margin-top: 10px">
+        <i class="bi bi-bell" style="font-size: 20px ;color: #00a1d9;"></i>
+        <img class="img-circle" src="assets/img/avatars/2.jpg" height="40" style="margin-left: 10px" alt="">
+      </div>
+
+    </div>
+  </nav>
+</header>
+<!-- End: Header -->
+
+
+<!-- 聊天组件 -->
+<div  class="container" style="text-align:center ;margin-top: 100px;height: 1000px" id="chat">
+  <div class="panel panel-widget chat-widget">
+    <div class="panel-heading">
+						<span class="panel-icon">
+						  <i class="fa fa-pencil"></i>
+						</span>
+      <span class="panel-title">智能问答</span>
+    </div>
+    <div style="height: 600px">
+      <div class="scroller-content" style="margin-top: 1.25rem;">
+        <!--这是对话-->
+        <div class="media container"  v-for="(item,index) in messages">
+          <!--机器人说话的部分-->
+          <div class="pull-left row" v-if="!item.mine">
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" alt="64x64" src="assets/img/logos/jqr.jpg">
+              </a>
+            </div>
+            <div class="media-body">
+              <h5>{{item.text}}</h5>
+            </div>
+          </div>
+          <!--真人说话的部分-->
+          <div class="pull-right row" v-if="item.mine" style="margin-right: 3rem;">
+            <div class="media-body">
+              <h5>{{item.text}}</h5>
+            </div>
+            <div class="media-right">
+              <a href="#">
+                <img class="media-object" alt="64x64" src="assets/img/avatars/1.jpg">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--底部输入框-->
+    <div class="panel-footer">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="请输入您的问题" v-model="input" @keyup.enter="getInput">
+        <span class="input-group-btn">
+								<button class="btn btn-default btn-gradient" type="button" @click="getInput">输入问题</button>
+							</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  var chat=new Vue({
+    el:'#chat',
+    data:{
+      input:'',
+      messages:[
+        {
+          mine:false,
+          text:"欢迎来到智能问答，请问我问题吧"
+        },
+        {
+          mine: true,
+          text:"TURBT"
+        },
+        {
+          mine:false,
+          text:"膀胱癌肿瘤切除术"
+        }
+      ]
+    },
+    methods:{
+      getInput:function(){
+        this.messages.push({mine:true,text:this.input});
+        this.input='';
+        this.getAnswer();
+      },
+      getAnswer:function (){
+        console.log('开始获取答案')
+        var that=this;
+        var question=this.messages[this.messages.length-1].text;
+        axios.get("http://localhost:8080/jjz").then(function (response){
+          console.log(response)
+          that.messages.push({mine:false,text:response.data})
+        },function (err){
+          console.log('ops,err')
+          console.log(err)
+        })
+      }
+    }
+  })
+</script>
+</body>
+</html>
