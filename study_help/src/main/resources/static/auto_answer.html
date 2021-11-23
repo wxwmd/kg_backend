@@ -147,6 +147,12 @@
 </div>
 
 
+<!--
+感冒的多发时期
+感冒的药物
+感冒的临床表现
+-->
+
 <script>
   var chat=new Vue({
     el:'#chat',
@@ -156,20 +162,13 @@
         {
           mine:false,
           text:"欢迎来到智能问答，请问我问题吧"
-        },
-        {
-          mine: true,
-          text:"TURBT"
-        },
-        {
-          mine:false,
-          text:"膀胱癌肿瘤切除术"
         }
       ]
     },
     methods:{
       getInput:function(){
         this.messages.push({mine:true,text:this.input});
+        console.log(this.input)
         this.input='';
         this.getAnswer();
       },
@@ -177,7 +176,7 @@
         console.log('开始获取答案')
         var that=this;
         var question=this.messages[this.messages.length-1].text;
-        axios.get("http://localhost:8080/jjz").then(function (response){
+        axios.get("http://localhost:8080/answer?text="+question).then(function (response){
           console.log(response)
           that.messages.push({mine:false,text:response.data})
         },function (err){
