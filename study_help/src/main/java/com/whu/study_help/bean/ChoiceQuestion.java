@@ -7,10 +7,10 @@ public class ChoiceQuestion extends Question {
     private List<String> choices;
     private String answer;
 
-    public ChoiceQuestion(TripleInstance tripleInstance) {
+    public ChoiceQuestion(TripleInstance tripleInstance ,List<String>choices) {
         super(tripleInstance);
         text=String.format("%s的%s是_____",this.tripleInstance.getHeadInstance(),this.tripleInstance.getQuestionTemplate().getRelation());
-        choices=List.of(this.tripleInstance.getTailInstance(),"选项1","选项2","选项3");
+        this.choices=choices;
         answer=this.tripleInstance.getTailInstance();
     }
 

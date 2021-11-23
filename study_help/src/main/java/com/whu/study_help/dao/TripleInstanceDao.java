@@ -6,6 +6,7 @@ import com.whu.study_help.bean.TripleTemplate;
 import org.neo4j.driver.*;
 import org.neo4j.driver.util.Pair;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /*
@@ -46,6 +47,25 @@ public class TripleInstanceDao {
             }
         });
         return tripleInstance;
+    }
+
+    public List<String> getEntityInstance(String entity,String property,int num){
+        String cql=String.format("MATCH (n:`%s`) WITH n,rand() AS number RETURN n.%s order by number LIMIT %d",entity,property,num);
+        System.out.println(cql);
+        List<String> result = session.readTransaction(new TransactionWork<List<String>>() {
+            @Override
+            public List<String> execute(Transaction transaction) {
+                List<String> results = new LinkedList<>();
+                Result result1 = transaction.run(cql);
+                while (result1.hasNext()) {
+                    List<Pair<String, Value>> fields1 = result1.next().fields();
+                    System.out.println(fields1.toString());
+                    results.add(fields1.get(0).value().toString());
+                }
+                return results;
+            }
+        }) ;
+        return result;
     }
 
     public void destory(){
