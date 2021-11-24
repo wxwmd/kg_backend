@@ -22,17 +22,18 @@ public class TripleInstanceDao {
         session=driver.session();
     }
 
-    public TripleInstance getTripleInstance(TripleTemplate tripleTemplate){
+    public List<TripleInstance> getTripleInstances(TripleTemplate tripleTemplate,int num){
         String cql=String.format("MATCH (u:`%s`)-[r:`%s`]->(v:`%s`)\n" +
                 "WITH u, v,rand() AS number\n" +
                 "RETURN u.%s,v.%s\n" +
                 "ORDER BY number\n" +
-                "LIMIT 1",tripleTemplate.getHead(),tripleTemplate.getRelation(),tripleTemplate.getTail(),tripleTemplate.getHeadProperty(),tripleTemplate.getTailProperty());
-        TripleInstance tripleInstance = session.readTransaction(new TransactionWork<TripleInstance>() {
+                "LIMIT %d",tripleTemplate.getHead(),tripleTemplate.getRelation(),tripleTemplate.getTail(),tripleTemplate.getHeadProperty(),tripleTemplate.getTailProperty(),num);
+        List<TripleInstance> tripleInstances = session.readTransaction(new TransactionWork<List<TripleInstance>>() {
             @Override
-            public TripleInstance execute(Transaction transaction) {
+            public List<TripleInstance> execute(Transaction transaction) {
+                List<TripleInstance> tripleInstances=new LinkedList<>();
                 Result result1 = transaction.run(cql);
-                if(result1.hasNext()){
+                while(result1.hasNext()){
                     List<Pair<String, Value>> fields1 = result1.next().fields();
                     System.out.println(fields1.toString());
                     String head = fields1.get(0).value().toString();
@@ -40,13 +41,12 @@ public class TripleInstanceDao {
                     TripleInstance tripleInstance1=new TripleInstance(tripleTemplate);
                     tripleInstance1.setHeadInstance(head);
                     tripleInstance1.setTailInstance(tail);
-                    return tripleInstance1;
-                }else{
-                    return null;
+                    tripleInstances.add(tripleInstance1);
                 }
+                return tripleInstances;
             }
         });
-        return tripleInstance;
+        return tripleInstances;
     }
 
     public List<String> getEntityInstance(String entity,String property,int num){

@@ -9,7 +9,7 @@ public class ChoiceQuestion extends Question {
 
     public ChoiceQuestion(TripleInstance tripleInstance ,List<String>choices) {
         super(tripleInstance);
-        text=String.format("%s的%s是_____",this.tripleInstance.getHeadInstance(),this.tripleInstance.getQuestionTemplate().getRelation());
+        text=String.format("%s的%s是（）",this.tripleInstance.getHeadInstance(),this.tripleInstance.getQuestionTemplate().getRelation());
         this.choices=choices;
         answer=this.tripleInstance.getTailInstance();
     }
